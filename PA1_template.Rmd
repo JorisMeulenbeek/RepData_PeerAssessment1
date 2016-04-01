@@ -5,10 +5,10 @@ output:
     keep_md: true
 ---
 ## Loading and preprocessing the data
-set working directory
+#set working directory
 setwd('/Users/Joris/Documents/Reproducable research');
 
-Unzip file en read
+#Unzip file en read
 filename <- unzip("activity.zip")
 activity <- read.csv(filename, stringsAsFactors = FALSE)
 str(activity)
