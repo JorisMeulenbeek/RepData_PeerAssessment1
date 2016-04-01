@@ -4,14 +4,17 @@ output:
   html_document:
     keep_md: true
 ---
-## Loading and preprocessing the data
-set working directory	
+# Loading and preprocessing the data
+set working directory
+
 setwd('/Users/Joris/Documents/Reproducable research');
 
-Unzip file en read
+
+##Unzip file en read
 filename <- unzip("activity.zip")
 activity <- read.csv(filename, stringsAsFactors = FALSE)
 str(activity)
+
 'data.frame':   17568 obs. of  3 variables:
 $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
 $ date    : chr  "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
