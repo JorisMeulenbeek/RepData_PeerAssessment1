@@ -5,6 +5,7 @@ output:
     keep_md: true
 ---
 # Loading and preprocessing the data
+-------------------------------------------------
 1. set working directory
 ```{r echo=TRUE}
 setwd('/Users/Joris/Documents/Reproducable research');
@@ -20,34 +21,28 @@ activity <- read.csv(filename, stringsAsFactors = FALSE)
 str(activity)
 ```
 Output:
-
 'data.frame':   17568 obs. of  3 variables:
-
 $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
-
 $ date    : chr  "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
-
 $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
 
 3. Dates are not properly formatted to a Date class so we will adjust that now.
-
+```{r echo=TRUE}
 activity$date <- as.Date(activity$date)
-
+```
+```{r echo=TRUE}
 str(activity)
-
+```
 Output:
-
 'data.frame':   17568 obs. of  3 variables:
-
 $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
-
 $ date    : Date, format: "2012-10-01" "2012-10-01" ...
-
 $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
 
 4. Missing values in file
+```{r echo=TRUE}
 table(is.na(activity$steps))
-
+```
 Output:
 FALSE  TRUE 
 15264  2304 
