@@ -6,11 +6,15 @@ output:
 ---
 # Loading and preprocessing the data
 1. set working directory
+
 setwd('/Users/Joris/Documents/Reproducable research');
 
 2. Unzip file en read
+
 filename <- unzip("activity.zip")
+
 activity <- read.csv(filename, stringsAsFactors = FALSE)
+
 str(activity)
 
 Output:
