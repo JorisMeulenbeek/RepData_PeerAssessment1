@@ -6,45 +6,43 @@ output:
 ---
 # Loading and preprocessing the data
 -------------------------------------------------
-1. set working directory
+* set working directory
 ```{r echo=TRUE}
 setwd('/Users/Joris/Documents/Reproducable research');
 ```
-2. Unzip file en read
+* Unzip file en read
 ```{r echo=TRUE}
 filename <- unzip("activity.zip")
 activity <- read.csv(filename, stringsAsFactors = FALSE)
 str(activity)
 ```
-3. Dates are not properly formatted to a Date class so we will adjust that now.
+* Dates are not properly formatted to a Date class so we will adjust that now.
 ```{r echo=TRUE}
 activity$date <- as.Date(activity$date)
 str(activity)
 ```
-4. Missing values in file
+* Missing values in file
 ```{r echo=TRUE}
 table(is.na(activity$steps))
 ```
 #What is mean total number of steps taken per day?
 I need a file without missing values. There are 2304 missing values, that will be excluded temporarily from our analysis. The dataset called “activity_comp” is created for this reason.
 
-5. Missing values in file
+* Missing values in file
 ```{r echo=TRUE}
 activity_comp<-activity[which(!is.na(activity$steps)),]
 ```
-The number of steps taken is measured in timeslots, 5-minute intervals, so in order to compute the total number of steps taken for each day we will aggregate the data by day. 
+It's a 5-minute interval timeslot, so let's aggregate the data by day. 
 ```{r echo=TRUE}
 daysteps<-tapply(activity_comp$steps, activity_comp$date, sum)
 ```
-So, now the per day dataset contains the total number of steps taken for each day of October and November (total 53 days)
-Let's make a histogram of the total number of steps taken each day.
+Total number of steps taken for each day of October and November (total 53 days)
+Make a histogram of the total number of steps taken each day.
 ```{r echo=TRUE}
 hist(daysteps,10, main = "Total number of steps taken per day", xlab = "")
 mean(daysteps)
 median(daysteps)
 ```
-In order to explore our data throughout the day, we will need to aggregate the dataset by the intervals. A per interval array is created for this reason and a time series plot will also be created. 
-
 #What is the average daily activity pattern?
 ```{r echo=TRUE}
 dailyact<-tapply(activity_comp$steps, activity_comp$interval, mean)
@@ -62,7 +60,7 @@ Calculate and report the total number of missing values in the dataset (i.e. the
 ```{r echo=TRUE}
 sum(is.na(activity))
 ```
-Strategy for filling in all of the missing values in the dataset. We take the mean for all NA values. Create a new dataset that is equal to the original dataset but with the missing data filled in.
+Take the mean for all NA values. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 ```{r echo=TRUE}
 activiteit_aangepast <- activity
 activiteit_aangepast[which(is.na(activiteit_aangepast$steps)),1]<-dailyact[as.character(activiteit_aangepast[which(is.na(activiteit_aangepast$steps)),3])]
@@ -71,7 +69,7 @@ No missing values are now in the new dataset:
 ```{r echo=TRUE}
 sum(is.na(activiteit_aangepast))
 ```
-Now let's make the same histogram, that we made in the first part of the analysis, in order to visually see if there is a big effect.
+NSame histogram, that we made in the beginning. 
 ```{r echo=TRUE}
 daysteps_new<-tapply(activiteit_aangepast$steps, activiteit_aangepast$date, sum)
 par(mfrow=c(1,2))
@@ -80,7 +78,7 @@ abline(v = median(daysteps), col = 4, lwd = 4)
 hist(daysteps_new,10, main = "Total number of steps taken per day (missing values replaced with mean of interval)", xlab = "Steps",ylim =c(0, 25))
 abline(v = median(daysteps_new), col = 4, lwd = 4)
 ```
-We now calculate the median and the mean of the filled in dataset
+Calculate the median and the mean of the filled in dataset
 ```{r echo=TRUE}
 mean(daysteps_new)
 median(daysteps_new)
@@ -89,14 +87,14 @@ median(daysteps_new)-median(daysteps)
 ```
 #Are there differences in activity patterns between weekdays and weekends?
 
-In this part of the assigment, we will create factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+Create a factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 ```{r echo=TRUE}
 activiteit_aangepast$wd<-weekdays(activiteit_aangepast$date)
 activiteit_aangepast$fwd<- as.factor(c("weekend", "weekday"))
 activiteit_aangepast[activiteit_aangepast$wd == "Sunday" | activiteit_aangepast$wd == "Saturday" ,5]<- factor("weekend")
 activiteit_aangepast[!(activiteit_aangepast$wd == "Sunday" | activiteit_aangepast$wd == "Saturday"),5 ]<- factor("weekday")
 ```
-Now we will create two aggregated arrays for the total number of steps taken per 5-minyute time interval for weekdays and weekends, and make a graph in order to compare it there is a difference. Note that the plot has been created in the base system.
+Create two aggregated arrays for the total number of steps taken per 5-minyute time interval for weekdays and weekends.
 ```{r echo=TRUE}
 activiteit_aangepast_wknd <- subset(activiteit_aangepast, wknd == "weekend") 
 activiteit_aangepast_week <- subset(activiteit_aangepast, wknd == "week")
