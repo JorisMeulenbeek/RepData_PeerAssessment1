@@ -6,17 +6,19 @@ output:
 ---
 # Loading and preprocessing the data
 1. set working directory
-
+```{r echo=TRUE}
 setwd('/Users/Joris/Documents/Reproducable research');
-
+```
 2. Unzip file en read
-
+```{r echo=TRUE}
 filename <- unzip("activity.zip")
-
+```
+```{r echo=TRUE}
 activity <- read.csv(filename, stringsAsFactors = FALSE)
-
+```
+```{r echo=TRUE}
 str(activity)
-
+```
 Output:
 
 'data.frame':   17568 obs. of  3 variables:
