@@ -5,44 +5,45 @@ output:
     keep_md: true
 ---
 # Loading and preprocessing the data
-set working directory
-
+1. set working directory
 setwd('/Users/Joris/Documents/Reproducable research');
 
-
-##Unzip file en read
+2. Unzip file en read
 filename <- unzip("activity.zip")
 activity <- read.csv(filename, stringsAsFactors = FALSE)
 str(activity)
 
+Output:
 'data.frame':   17568 obs. of  3 variables:
 $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
 $ date    : chr  "2012-10-01" "2012-10-01" "2012-10-01" "2012-10-01" ...
 $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
 
-Dates are not properly formatted to a Date class so we will adjust that now.
+3. Dates are not properly formatted to a Date class so we will adjust that now.
 activity$date <- as.Date(activity$date)
 str(activity)
 
+Output:
 'data.frame':   17568 obs. of  3 variables:
 $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
 $ date    : Date, format: "2012-10-01" "2012-10-01" ...
 $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
 
-Missing values in file
+4. Missing values in file
 table(is.na(activity$steps))
 
+Output:
 FALSE  TRUE 
 15264  2304 
 
-## What is mean total number of steps taken per day?
-I need a file without missing values.
-There are 2304 missing values, that will be excluded temporarily from our analysis.
-The dataset called “activity_comp” is created for this reason.
+#What is mean total number of steps taken per day?
+I need a file without missing values. There are 2304 missing values, that will be excluded temporarily from our analysis. The dataset called “activity_comp” is created for this reason.
 
+5. Missing values in file
 activity_comp<-activity[which(!is.na(activity$steps)),]
 
-The number of steps taken is measured in timeslots, 5-minute intervals, so in order to compute the total number of steps taken for each day we will aggregate the data by day.
+The number of steps taken is measured in timeslots, 5-minute intervals, so in order to compute the total number of steps taken for each day we will aggregate the data by day. 
+
 daysteps<-tapply(activity_comp$steps, activity_comp$date, sum)
 
 So, now the per day dataset contains the total number of steps taken for each day of October and November (total 53 days)
