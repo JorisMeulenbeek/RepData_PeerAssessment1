@@ -72,9 +72,9 @@ Same histogram, that we made in the beginning.
 ```{r echo=TRUE}
 daysteps_new<-tapply(activiteit_aangepast$steps, activiteit_aangepast$date, sum)
 par(mfrow=c(1,2))
-hist(daysteps,10, main = "Total number of steps a day", xlab = "Steps", ylim =c(0, 25))
+hist(daysteps,10, main = "Number steps a day", xlab = "Steps", ylim =c(0, 25))
 abline(v = median(daysteps), col = 4, lwd = 4)
-hist(daysteps_new,10, main = "Total number of steps taken per day (missing values replaced with mean of interval)", xlab = "Steps",ylim =c(0, 25))
+hist(daysteps_new,10, main = "Number steps a day (NA = mean)", xlab = "Steps",ylim =c(0, 25))
 abline(v = median(daysteps_new), col = 4, lwd = 4)
 ```
 Calculate the median and the mean of the filled in dataset
@@ -90,8 +90,8 @@ Create a factor variable in the dataset with two levels – “weekday” and �
 ```{r echo=TRUE}
 activiteit_aangepast$wd<-weekdays(activiteit_aangepast$date)
 activiteit_aangepast$fwd<- as.factor(c("weekend", "weekday"))
-activiteit_aangepast[activiteit_aangepast$wd == "Sunday" | activiteit_aangepast$wd == "Saturday" ,5]<- factor("weekend")
-activiteit_aangepast[!(activiteit_aangepast$wd == "Sunday" | activiteit_aangepast$wd == "Saturday"),5 ]<- factor("weekday")
+activiteit_aangepast[activiteit_aangepast$wd == "zondag" | activiteit_aangepast$wd == "zaterdag" ,5]<- factor("weekend")
+activiteit_aangepast[!(activiteit_aangepast$wd == "zondag" | activiteit_aangepast$wd == "zaterdag"),5 ]<- factor("weekday")
 ```
 Create two aggregated arrays for the total number of steps taken per 5-minyute time interval for weekdays and weekends.
 ```{r echo=TRUE}
