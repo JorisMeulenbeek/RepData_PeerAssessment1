@@ -95,8 +95,8 @@ activiteit_aangepast[!(activiteit_aangepast$wd == "zondag" | activiteit_aangepas
 ```
 Create two aggregated arrays for the total number of steps taken per 5-minyute time interval for weekdays and weekends.
 ```{r echo=TRUE}
-activiteit_aangepast_wknd <- subset(activiteit_aangepast, wknd == "weekend") 
-activiteit_aangepast_week <- subset(activiteit_aangepast, wknd == "week")
+activiteit_aangepast_wknd <- subset(activiteit_aangepast, fwd == "weekend") 
+activiteit_aangepast_week <- subset(activiteit_aangepast, fwd == "weekday")
 dailyact_wknd<-tapply(activiteit_aangepast_wknd$steps, activiteit_aangepast_wknd$interval, mean)
 dailyact_week<-tapply(activiteit_aangepast_week$steps, activiteit_aangepast_week$interval, mean)
 par(mfrow=c(2,1))
