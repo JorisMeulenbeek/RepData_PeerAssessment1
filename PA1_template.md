@@ -42,6 +42,9 @@ median(daysteps)
 dailyact<-tapply(activity_comp$steps, activity_comp$interval, mean)
 plot(y = dailyact, x = names(dailyact), type = "l", xlab = "5-Minute-Interval", main = "Daily Activity Pattern", ylab = "Average number of steps")
 ```
+
+![](instructions_fig/unnamed-chunk-1.png.png )
+
 The maximum average number of steps throughout the days is 835 with 206.1698 steps.
 ```{r echo=TRUE}
 dailyact[dailyact==max(dailyact)]
