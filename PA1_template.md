@@ -34,8 +34,10 @@ Total number of steps taken for each day of October and November (total 53 days)
 Make a histogram of the total number of steps taken each day.
 ```{r echo=TRUE}
 hist(daysteps,10, main = "Total number of steps taken per day", xlab = "")
-![](instructions_fig/unnamed-chunk-1.png.png )
+```
 
+![](instructions_fig/unnamed-chunk-1.png.png )
+```{r echo=TRUE}
 mean(daysteps)
 median(daysteps)
 ```
@@ -78,6 +80,7 @@ hist(daysteps_new,10, main = "Number steps a day (NA = mean)", xlab = "Steps",yl
 abline(v = median(daysteps_new), col = 4, lwd = 4)
 ```
 ![](instructions_fig/unnamed-chunk-3.png.png )
+
 Calculate the median and the mean of the filled in dataset
 ```{r echo=TRUE}
 mean(daysteps_new)
@@ -102,5 +105,7 @@ dailyact_wknd<-tapply(activiteit_aangepast_wknd$steps, activiteit_aangepast_wknd
 dailyact_week<-tapply(activiteit_aangepast_week$steps, activiteit_aangepast_week$interval, mean)
 par(mfrow=c(2,1))
 plot(y = dailyact_week, x = names(dailyact_week), type = "l", xlab = "5-Minute Interval",  main = "Daily Activity on Weekdays", ylab = "Average number of steps", ylim =c(0, 250))
-plot(y = dailyact_wknd, x = names(dailyact_wknd), type = "l", xlab = "5-Minute Interval", main = "Daily Activity on Weekends", ylab = "Average number of steps", ylim =c(0, 250))```
+plot(y = dailyact_wknd, x = names(dailyact_wknd), type = "l", xlab = "5-Minute Interval", main = "Daily Activity on Weekends", ylab = "Average number of steps", ylim =c(0, 250))
+```
+
 ![](instructions_fig/unnamed-chunk-4.png.png )
