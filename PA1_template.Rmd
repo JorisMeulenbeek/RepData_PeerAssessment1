@@ -1,10 +1,9 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
+output: html_document:
     keep_md: true
 ---
-# Loading and preprocessing the data
+##Loading and preprocessing the data
 -------------------------------------------------
 * set working directory
 ```{r echo=TRUE}
@@ -16,7 +15,7 @@ filename <- unzip("activity.zip")
 activity <- read.csv(filename, stringsAsFactors = FALSE)
 str(activity)
 ```
-* Dates are not properly formatted to a Date class so we will adjust that now.
+* Put Dates in right format.
 ```{r echo=TRUE}
 activity$date <- as.Date(activity$date)
 str(activity)
@@ -25,7 +24,7 @@ str(activity)
 ```{r echo=TRUE}
 table(is.na(activity$steps))
 ```
-#What is mean total number of steps taken per day?
+##What is mean total number of steps taken per day?
 I need a file without missing values. There are 2304 missing values, that will be excluded temporarily from our analysis. The dataset called “activity_comp” is created for this reason.
 
 * Missing values in file
@@ -43,7 +42,7 @@ hist(daysteps,10, main = "Total number of steps taken per day", xlab = "")
 mean(daysteps)
 median(daysteps)
 ```
-#What is the average daily activity pattern?
+##What is the average daily activity pattern?
 ```{r echo=TRUE}
 dailyact<-tapply(activity_comp$steps, activity_comp$interval, mean)
 plot(y = dailyact, x = names(dailyact), type = "l", xlab = "5-Minute-Interval", main = "Daily Activity Pattern", ylab = "Average number of steps")
@@ -69,7 +68,7 @@ No missing values are now in the new dataset:
 ```{r echo=TRUE}
 sum(is.na(activiteit_aangepast))
 ```
-NSame histogram, that we made in the beginning. 
+Same histogram, that we made in the beginning. 
 ```{r echo=TRUE}
 daysteps_new<-tapply(activiteit_aangepast$steps, activiteit_aangepast$date, sum)
 par(mfrow=c(1,2))
