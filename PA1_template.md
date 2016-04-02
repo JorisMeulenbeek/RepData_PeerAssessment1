@@ -34,6 +34,8 @@ Total number of steps taken for each day of October and November (total 53 days)
 Make a histogram of the total number of steps taken each day.
 ```{r echo=TRUE}
 hist(daysteps,10, main = "Total number of steps taken per day", xlab = "")
+![](instructions_fig/unnamed-chunk-1.png.png )
+
 mean(daysteps)
 median(daysteps)
 ```
@@ -43,7 +45,7 @@ dailyact<-tapply(activity_comp$steps, activity_comp$interval, mean)
 plot(y = dailyact, x = names(dailyact), type = "l", xlab = "5-Minute-Interval", main = "Daily Activity Pattern", ylab = "Average number of steps")
 ```
 
-![](instructions_fig/unnamed-chunk-1.png.png )
+![](instructions_fig/unnamed-chunk-2.png.png )
 
 The maximum average number of steps throughout the days is 835 with 206.1698 steps.
 ```{r echo=TRUE}
@@ -75,6 +77,7 @@ abline(v = median(daysteps), col = 4, lwd = 4)
 hist(daysteps_new,10, main = "Number steps a day (NA = mean)", xlab = "Steps",ylim =c(0, 25))
 abline(v = median(daysteps_new), col = 4, lwd = 4)
 ```
+![](instructions_fig/unnamed-chunk-3.png.png )
 Calculate the median and the mean of the filled in dataset
 ```{r echo=TRUE}
 mean(daysteps_new)
@@ -100,3 +103,4 @@ dailyact_week<-tapply(activiteit_aangepast_week$steps, activiteit_aangepast_week
 par(mfrow=c(2,1))
 plot(y = dailyact_week, x = names(dailyact_week), type = "l", xlab = "5-Minute Interval",  main = "Daily Activity on Weekdays", ylab = "Average number of steps", ylim =c(0, 250))
 plot(y = dailyact_wknd, x = names(dailyact_wknd), type = "l", xlab = "5-Minute Interval", main = "Daily Activity on Weekends", ylab = "Average number of steps", ylim =c(0, 250))```
+![](instructions_fig/unnamed-chunk-4.png.png )
